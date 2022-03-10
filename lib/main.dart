@@ -1,3 +1,5 @@
+import 'package:brum_kart/profile.dart';
+import 'package:brum_kart/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -41,9 +43,8 @@ class _MyAppState extends State<MyApp> {
               child: Container(
                 margin: const EdgeInsets.only(bottom: 20),
                 child: FloatingActionButton.extended(
-                  onPressed: () {
-                    // Add your onPressed code here!
-                  },
+                  onPressed: () => Navigator.push(context,  MaterialPageRoute(builder : (context) =>ListRoute()
+                    )),
                   label: const Text('Demarrer la course'),
                   icon: Image.asset('assets/images/scooter.png',
                       width: 90, height: 80),
@@ -57,9 +58,8 @@ class _MyAppState extends State<MyApp> {
              child: Container(
                margin: const EdgeInsets.only(right: 10,top: 10),
                child: FloatingActionButton(
-                 onPressed: (){
-
-                 },
+                 onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder : (context) => Profile()
+                    )),
                  child: profileImage(),
                ),
                height: 70,

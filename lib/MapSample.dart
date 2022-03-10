@@ -3,7 +3,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'main.dart';
 
-class SimpleMap extends State<MyApp> {
+// ignore: must_be_immutable
+class SimpleMap extends StatelessWidget {
   GoogleMapController mapController;
 
   final LatLng _center = const LatLng(45.521563, -122.677433);

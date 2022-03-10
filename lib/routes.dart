@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'MapSample.dart';
-import 'main.dart';
 
-class Profile extends StatelessWidget {
+class ListRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -10,10 +9,12 @@ class Profile extends StatelessWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             tooltip: 'Retour',
-            onPressed: () => Navigator.push(context, MaterialPageRoute(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
                   builder: (context) =>
-                      MyApp()
-              )),
+                      SimpleMap()
+              ));
+            },
           ),
           automaticallyImplyLeading: false
       ),
