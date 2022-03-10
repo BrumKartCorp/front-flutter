@@ -42,7 +42,7 @@ class ListRoute extends StatelessWidget {
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(
                   builder: (context) =>
-                      SimpleMap()
+                      MyApp()
               ));
             },
           ),

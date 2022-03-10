@@ -12,7 +12,7 @@ import 'view/authentification_view.dart';
 
 void main(){
   runApp(new MaterialApp(
-    home: new Authentification(),
+    home: new ListRoute(),
   ));
 }
 

@@ -12,7 +12,13 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'main.dart';
 import 'route.dart';
 
-class SimpleMap extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State createState() => _SimpleMap();
+}
+
+
+class _SimpleMap extends State<MyApp> {
   GoogleMapController mapController;
   Set<Marker> markers = Set();
   Marker currentMarker;
@@ -70,22 +76,14 @@ class SimpleMap extends StatelessWidget {
               zoom: 15.0,
             ),
           ),
-
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () async {
-            List<LatLng> latlng = [new LatLng(48.85749,2.351553), new LatLng(48.86233,2.334866)];
-            markers = directionService.getMarkerList(latlng);
-            polylines = await directionService.getPolyLineRoute(new LatLng(48.85749,2.351553), new LatLng(48.86233,2.334866));
-            setState(() {});
-          },
-          label: const Text('Demarrer la course'),
-          icon: Image.asset('assets/images/scooter.png', width: 90, height: 120,),
-          backgroundColor: Colors.red,
-        ),
         floatingActionButton: SizedBox(
           height: 100,
           child: FloatingActionButton.extended(
-            onPressed: () {
+            onPressed: () async {
+              List<LatLng> latlng = [new LatLng(48.85749,2.351553), new LatLng(48.86233,2.334866)];
+              markers = directionService.getMarkerList(latlng);
+              polylines = await directionService.getPolyLineRoute(new LatLng(48.85749,2.351553), new LatLng(48.86233,2.334866));
+              setState(() {});
               Navigator.push(context, MaterialPageRoute(
                   builder: (context) =>
                       ListRoute()
