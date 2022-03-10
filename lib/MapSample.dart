@@ -10,8 +10,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 import 'main.dart';
+import 'route.dart';
 
-class SimpleMap extends State<MyApp> {
+class SimpleMap extends StatelessWidget {
   GoogleMapController mapController;
   Set<Marker> markers = Set();
   Marker currentMarker;
@@ -58,10 +59,6 @@ class SimpleMap extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Maps Sample App'),
-          backgroundColor: Colors.green[700],
-        ),
         body: GoogleMap(
             gestureRecognizers: ,
             polylines: Set<Polyline>.of(polylines.values),
@@ -85,6 +82,26 @@ class SimpleMap extends State<MyApp> {
           label: const Text('Demarrer la course'),
           icon: Image.asset('assets/images/scooter.png', width: 90, height: 120,),
           backgroundColor: Colors.red,
+        ),
+        floatingActionButton: SizedBox(
+          height: 100,
+          child: FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) =>
+                      ListRoute()
+              ));
+            },
+            label: const Text(
+              'Demarrer la course',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20
+              ),
+            ),
+            icon: Image.asset('assets/images/scooter.png', width: 90, height: 150,),
+            backgroundColor: Colors.red,
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),

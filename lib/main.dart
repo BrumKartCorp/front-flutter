@@ -1,18 +1,47 @@
-
+import 'package:brum_kart/controller/authentification.dart';
 import 'package:brum_kart/MapSample.dart';
+import 'package:brum_kart/route.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import 'controller/authentification.dart';
+import 'view/authentification_view.dart';
+
+
+
 void main(){
   runApp(new MaterialApp(
-    home: new MyApp(),
+    home: new Authentification(),
   ));
 }
 
-
 class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
-
   @override
-  SimpleMap createState() => SimpleMap();
+  _MyAppState createState() => new _MyAppState();
 }
+
+class _MyAppState extends State<MyApp>  {
+  @override
+  Widget build(BuildContext context) {
+    return new SplashScreen(
+        seconds: 3,
+        navigateAfterSeconds: new Authentification(),
+        title: new Text('BrumKart 8 Deluxe',
+          style: new TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0
+          ),
+        ),
+        image: new Image.asset('assets/images/brumKart.png'),
+        backgroundColor: Colors.white,
+        styleTextUnderTheLoader: new TextStyle(),
+        photoSize: 100.0,
+        onClick: ()=>print("Flutter Egypt"),
+        loaderColor: Colors.red
+    );
+  }
+}
+
+
 
