@@ -1,8 +1,9 @@
+import 'package:brum_kart/controller/authentification.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 void main(){
   runApp(new MaterialApp(
-    home: new MyApp(),
+    home: new Authentification(),
   ));
 }
 

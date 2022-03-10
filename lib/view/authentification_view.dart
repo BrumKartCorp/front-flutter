@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../entity/User.dart';
+import '../helper/brumkart_api.dart';
+
 class AuthentificationView extends StatefulWidget {
   AuthentificationView({Key key, this.title}) : super(key: key);
   final String title;
@@ -9,7 +12,20 @@ class AuthentificationView extends StatefulWidget {
 }
 
 class _AuthentificationView extends State<AuthentificationView> {
-  int _counter = 0;
+  final user = TextEditingController();
+  final password = TextEditingController();
+
+  User USER;
+
+  getConnection(String user, String password) async {
+    User data = await Brumkart.fetchUser(user);
+    if(data.password == password) {
+      USER = data;
+      print("hello");
+    }else {
+      print("pas hello");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +36,7 @@ class _AuthentificationView extends State<AuthentificationView> {
       body: Center(
         child: Column(
           children: <Widget>[
-            Image(image: AssetImage('assets/logo.png')),
+            Image(image: AssetImage('assets/images/logo.png')),
             Card(
               elevation: 2,
               child: login()
@@ -39,6 +55,7 @@ class _AuthentificationView extends State<AuthentificationView> {
       child: Column(
         children: [
           TextField(
+            controller: user,
             autofocus: false,
             style: TextStyle(fontSize: 22.0, color: Color(0xFFbdc6cf)),
             decoration: InputDecoration(
@@ -58,6 +75,7 @@ class _AuthentificationView extends State<AuthentificationView> {
             ),
           ),
           TextField(
+            controller: password,
             autofocus: false,
             style: TextStyle(fontSize: 22.0, color: Color(0xFFbdc6cf)),
             decoration: InputDecoration(
@@ -98,16 +116,18 @@ class _AuthentificationView extends State<AuthentificationView> {
                   primary: Colors.white,
                   textStyle: const TextStyle(fontSize: 20),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  print(user.value);
+                  getConnection(user.value.text, password.value.text);
+
+                },
                 child: const Text('Connexion'),
               ),
             ],
           )
         ),
             TextButton(
-              onPressed: () => {
-
-              },
+              onPressed: () => print("hello"),
               child: const Text('Inscription'),
     ),
         ],
