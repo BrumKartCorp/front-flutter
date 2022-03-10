@@ -15,25 +15,62 @@ Future<ApiResponse> fetchInfo() async {
       'Content-Type': 'application/json'
     },
   );
-  final jsonResponse = json.decode(response.body);
+  final jsonResponse = jsonDecode(response.body);
 
   return ApiResponse.fromJson(jsonResponse);
 }
 
-Future<ApiResponse> fetchAlbum() async {
-  final response = await http
-      .get(Uri.parse(jsonplaceholder));
 
-  if (response.statusCode == 200) {
-    return ApiResponse.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Failed to load album');
+
+class ListeRoute extends StatefulWidget {
+  ListeRoute({Key key}) : super(key: key);
+  @override
+  State<StatefulWidget> createState() {
+    return new _ListRoute();
   }
+
 }
 
-class ListRoute extends StatelessWidget {
+class _ListRoute extends State<ListeRoute> {
+
+  List<ApiResponse> listModel;
+
+
+  @override
+  void initState() {
+    print("init");
+      fetch();
+
+  }
+
+  Future<List<ApiResponse>> fetchAlbum() async {
+    List<ApiResponse> model = [];
+    final response = await http
+        .get(Uri.parse(jsonplaceholder));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      setState(() {
+        for(Map i in data){
+          model.add(ApiResponse.fromJson(i));
+
+        }
+
+      });
+
+      return model;
+
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
+
+
+  Future<List<ApiResponse>> fetch() async => await fetchAlbum();
+
   @override
   Widget build(BuildContext context) {
+    print(listModel);
     return new Scaffold(
       appBar: new AppBar(
           leading: IconButton(
@@ -59,20 +96,7 @@ class ListRoute extends StatelessWidget {
               ),
             ),
           ),
-          FutureBuilder<ApiResponse>(
-            future: fetchAlbum(),
 
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(snapshot.data.name);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
-            },
-          )
         ],
       ),
     );

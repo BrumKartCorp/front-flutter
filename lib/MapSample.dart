@@ -76,35 +76,12 @@ class SimpleMap extends StatelessWidget {
             List<LatLng> latlng = [new LatLng(48.85749,2.351553), new LatLng(48.86233,2.334866)];
             markers = directionService.getMarkerList(latlng);
             polylines = await directionService.getPolyLineRoute(new LatLng(48.85749,2.351553), new LatLng(48.86233,2.334866));
-            setState(() {});
           },
           label: const Text('Demarrer la course'),
           icon: Image.asset('assets/images/scooter.png', width: 90, height: 120,),
           backgroundColor: Colors.red,
         ),
-        floatingActionButton: SizedBox(
-          height: 100,
-          child: FloatingActionButton.extended(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (context) =>
-                      ListRoute()
-              ));
-            },
-            label: const Text(
-              'Demarrer la course',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20
-              ),
-            ),
-            icon: Image.asset('assets/images/scooter.png', width: 90, height: 150,),
-            backgroundColor: Colors.red,
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      ),
-    );
+    ));
   }
 
 
