@@ -12,13 +12,13 @@ import 'view/authentification_view.dart';
 
 void main(){
   runApp(new MaterialApp(
-    home: new Authentification(),
+    home: new MyApp(),
   ));
 }
 
 class MyApp extends StatefulWidget {
   @override
-  _MyAppState createState() => new _MyAppState();
+  SimpleMap createState() => new SimpleMap();
 }
 
 class _MyAppState extends State<MyApp>  {
