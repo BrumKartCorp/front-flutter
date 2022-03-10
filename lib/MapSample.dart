@@ -1,9 +1,8 @@
+import 'package:brum_kart/profile.dart';
+import 'package:brum_kart/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'main.dart';
-
-// ignore: must_be_immutable
 class SimpleMap extends StatelessWidget {
   GoogleMapController mapController;
 
@@ -12,6 +11,7 @@ class SimpleMap extends StatelessWidget {
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
+
 
   @override
   Widget build(BuildContext context) {

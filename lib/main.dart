@@ -39,33 +39,37 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                child: FloatingActionButton.extended(
-                  onPressed: () => Navigator.push(context,  MaterialPageRoute(builder : (context) =>ListRoute()
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: FloatingActionButton.extended(
+
+                    onPressed: () => Navigator.push(context,  MaterialPageRoute(builder : (context) =>ListRoute()
                     )),
-                  label: const Text('Demarrer la course'),
-                  icon: Image.asset('assets/images/scooter.png',
-                      width: 90, height: 80),
-                  backgroundColor: Colors.red,
-                ),
-              )
+
+                    label: const Text('Demarrer la course'),
+                    icon: Image.asset('assets/images/scooter.png',
+                        width: 90, height: 80),
+                    backgroundColor: Colors.red,
+                  ),
+                )
             ),
 
             Align(
-             alignment: Alignment.topRight,
-             child: Container(
-               margin: const EdgeInsets.only(right: 10,top: 10),
-               child: FloatingActionButton(
-                 onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder : (context) => Profile()
-                    )),
-                 child: profileImage(),
-               ),
-               height: 70,
-               width: 70,
-             ),
-           )
+              alignment: Alignment.topRight,
+              child: Container(
+                margin: const EdgeInsets.only(right: 10,top: 10),
+                child: FloatingActionButton(
+
+                  onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder : (context) => Profile()
+                  )),
+
+                  child: profileImage(),
+                ),
+                height: 70,
+                width: 70,
+              ),
+            )
           ],
         ),
       ),
@@ -73,8 +77,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget profileImage() =>  CircleAvatar(
-      radius: 110,
-      backgroundColor: Colors.red,
-      backgroundImage : AssetImage('assets/images/mario.png'),
+    radius: 110,
+    backgroundColor: Colors.red,
+    backgroundImage : AssetImage('assets/images/mario.png'),
   );
 }
