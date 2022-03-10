@@ -1,3 +1,4 @@
+import 'package:brum_kart/helloworld.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -5,7 +6,7 @@ import '3dScooter.dart';
 
 void main(){
   runApp(new MaterialApp(
-    home: new ScooterView(),
+    home: new HelloWorld(),
   ));
 }
 
