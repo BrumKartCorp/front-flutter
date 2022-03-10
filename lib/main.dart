@@ -19,12 +19,12 @@ class _MyAppState extends State<MyApp> {
     return new SplashScreen(
         seconds: 3,
         navigateAfterSeconds: new AfterSplash(),
-        title: new Text('Welcome In SplashScreen',
+        title: new Text('BrumKart 8 Deluxe',
           style: new TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20.0
           ),),
-        image: new Image.asset('assets/images/logo_brumaire.png'),
+        image: new Image.asset('assets/images/brumKart.png'),
         backgroundColor: Colors.white,
         styleTextUnderTheLoader: new TextStyle(),
         photoSize: 100.0,
@@ -47,8 +47,8 @@ class AfterSplash extends StatelessWidget {
           style: new TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 30.0
-          ),),
-
+          ),
+        ),
       ),
     );
   }
