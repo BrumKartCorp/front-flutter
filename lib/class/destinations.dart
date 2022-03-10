@@ -7,10 +7,10 @@ class ApiResponse {
   ApiResponse({this.id, this.name, this.start, this.end});
 
   factory ApiResponse.fromJson(Map<String, dynamic> json) => ApiResponse(
-          id: json["id"],
-          name: json["name"],
-          start: Location.fromJson(json["start"]),
-          end: Location.fromJson(json["end"])
+          id: json["id"] == null ? Location() : json["id"],
+          name: json["name"]  == null ? Location() : json["name"],
+          start: json["start"] == null ? Location() : Location.fromJson(json["start"]),
+          end: json["end"] == null ? Location() : Location.fromJson(json["end"])
       );
 }
 
