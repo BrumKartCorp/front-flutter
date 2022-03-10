@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'MapSample.dart';
 import 'package:http/http.dart' as http;
 
-final String jsonplaceholder = "http://5.196.91.59:8001/path/get";
+final String jsonplaceholder = "http://srv01.lphn.fr:8001/path/get";
 
 Future<ApiResponse> fetchInfo() async {
   final response = await http.get(
@@ -18,6 +18,17 @@ Future<ApiResponse> fetchInfo() async {
   final jsonResponse = json.decode(response.body);
 
   return ApiResponse.fromJson(jsonResponse);
+}
+
+Future<ApiResponse> fetchAlbum() async {
+  final response = await http
+      .get(Uri.parse(jsonplaceholder));
+
+  if (response.statusCode == 200) {
+    return ApiResponse.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to load album');
+  }
 }
 
 class ListRoute extends StatelessWidget {
@@ -48,17 +59,18 @@ class ListRoute extends StatelessWidget {
               ),
             ),
           ),
-          FutureBuilder(
-            future: fetchInfo(),
-            // ignore: missing_return
+          FutureBuilder<ApiResponse>(
+            future: fetchAlbum(),
 
-            // ignore: missing_return
-            builder: (context, snapshot){
-              if(snapshot.hasData){
-                return new Text(snapshot.data[0].checkpoints[0].name);
-              } else if(snapshot.hasError) {
-                return new Text("Error");
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Text(snapshot.data.name);
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
               }
+
+              // By default, show a loading spinner.
+              return const CircularProgressIndicator();
             },
           )
         ],

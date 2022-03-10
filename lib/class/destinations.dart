@@ -14,7 +14,6 @@ class ApiResponse {
       );
 }
 
-
 class Location{
   final String id;
   final String latitude;
@@ -27,5 +26,4 @@ class Location{
       latitude: json["latitude"],
       longitude: json["longitude"],
   );
-
 }
