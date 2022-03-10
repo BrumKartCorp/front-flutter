@@ -1,3 +1,4 @@
+import 'package:brum_kart/controller/authentification.dart';
 import 'package:brum_kart/MapSample.dart';
 import 'package:brum_kart/route.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ import 'view/authentification_view.dart';
 
 void main(){
   runApp(new MaterialApp(
-    home: new MyApp(),
+    home: new Authentification(),
   ));
 }
 
