@@ -206,10 +206,7 @@ class SimpleMap extends State<MyApp> {
     radius: 110,
     backgroundImage: AssetImage('assets/images/target.png'),
     backgroundColor: Colors.white,
-
   );
-
-
 }
 
 
