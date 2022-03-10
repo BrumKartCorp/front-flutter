@@ -12,10 +12,10 @@ class ListRoute extends StatelessWidget {
             icon: const Icon(Icons.arrow_back),
             tooltip: 'Retour',
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (context) =>
-                      SimpleMap()
-              ));
+              // Navigator.push(context, MaterialPageRoute(
+              //     builder: (context) =>
+              //         SimpleMap()
+              // ));
             },
           ),
           automaticallyImplyLeading: false
