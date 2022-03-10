@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'package:model_viewer/model_viewer.dart';
+
+import '3dScooter.dart';
+
 void main(){
   runApp(new MaterialApp(
-    home: new MyApp(),
+    home: new ScooterView(),
   ));
 }
 
