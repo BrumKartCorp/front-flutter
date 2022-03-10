@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'MapSample.dart';
 import 'main.dart';
 
 class ListRoute extends StatelessWidget {
@@ -13,7 +14,7 @@ class ListRoute extends StatelessWidget {
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(
                   builder: (context) =>
-                      AfterSplash()
+                      SimpleMap()
               ));
             },
           ),
