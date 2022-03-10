@@ -63,7 +63,6 @@ class SimpleMap extends State<MyApp> {
           backgroundColor: Colors.green[700],
         ),
         body: GoogleMap(
-            gestureRecognizers: ,
             polylines: Set<Polyline>.of(polylines.values),
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
