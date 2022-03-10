@@ -1,6 +1,4 @@
-import 'package:brum_kart/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class AuthentificationView extends StatefulWidget {
   AuthentificationView({Key key, this.title}) : super(key: key);
@@ -22,7 +20,7 @@ class _AuthentificationView extends State<AuthentificationView> {
       body: Center(
         child: Column(
           children: <Widget>[
-            Image(image: AssetImage('lib/assets/logo.png')),
+            Image(image: AssetImage('assets/logo.png')),
             Card(
               elevation: 2,
               child: login()
