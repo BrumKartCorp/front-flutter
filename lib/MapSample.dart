@@ -60,7 +60,6 @@ class SimpleMap extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: GoogleMap(
-            gestureRecognizers: ,
             polylines: Set<Polyline>.of(polylines.values),
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
