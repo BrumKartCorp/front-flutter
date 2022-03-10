@@ -1,54 +1,39 @@
-
 import 'package:flutter/material.dart';
-import 'package:splashscreen/splashscreen.dart';
-void main(){
-  runApp(new MaterialApp(
-    home: new MyApp(),
-  ));
-}
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
-  _MyAppState createState() => new _MyAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return new SplashScreen(
-        seconds: 3,
-        navigateAfterSeconds: new AfterSplash(),
-        title: new Text('Welcome In SplashScreen',
-          style: new TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0
-          ),),
-        image: new Image.asset('assets/images/logo_brumaire.png'),
-        backgroundColor: Colors.white,
-        styleTextUnderTheLoader: new TextStyle(),
-        photoSize: 100.0,
-        onClick: ()=>print("Flutter Egypt"),
-        loaderColor: Colors.red
-    );
+  GoogleMapController mapController;
+
+  final LatLng _center = const LatLng(45.521563, -122.677433);
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
   }
-}
 
-class AfterSplash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-          title: new Text("Welcome In SplashScreen Package"),
-          automaticallyImplyLeading: false
-      ),
-      body: new Center(
-        child: new Text("Done!",
-          style: new TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 30.0
-          ),),
-
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Maps Sample App'),
+          backgroundColor: Colors.green[700],
+        ),
+        body: GoogleMap(
+          onMapCreated: _onMapCreated,
+          initialCameraPosition: CameraPosition(
+            target: _center,
+            zoom: 11.0,
+          ),
+        ),
       ),
     );
   }
