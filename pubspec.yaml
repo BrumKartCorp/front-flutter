@@ -47,6 +47,7 @@ flutter:
     - assets/images/logo_brumaire.png
     - assets/images/bleu.jpg
     - assets/images/rouge.jpg
+    - assets/images/vert.jpg
     - assets/images/motif-a-fleurs.jpg
     - assets/models/scuuter.glb
   # The following line ensures that the Material Icons font is

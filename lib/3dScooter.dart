@@ -24,7 +24,6 @@ class _ScooterView extends State<ScooterView> {
             ),
           ),
           Container(
-            //height: height * 0.30,
             child: SingleChildScrollView(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,43 +31,48 @@ class _ScooterView extends State<ScooterView> {
                 children: <Widget>[
                   Expanded(
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const ListTile(
-                          title: Image(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Image(
                             image: AssetImage("assets/images/bleu.jpg"),
                             height: 50,
                           ),
-                          subtitle: Text("Couleur bleu"),
-                        )
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const ListTile(
-                          title: Image(
-                            image: AssetImage("assets/images/rouge.jpg"),
-                            height: 50,
-                          ),
-                          subtitle: Text("Couleur rouge"),
-                        )
-                      ],
-                    ),
+                          Center(child: Text("Bleu"))
+                        ]),
                   ),
                   Expanded(
                     child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          const ListTile(
-                            title: Image(
-                              image: AssetImage("assets/images/motif-a-fleurs.jpg"),
-                              height: 50,
-                            ),
-                            subtitle: Text("Motif à fleur"),
-                          )
+                          Image(
+                            image: AssetImage("assets/images/rouge.jpg"),
+                            height: 50,
+                          ),
+                          Center(child: Text("Rouge"))
+                        ]),
+                  ),
+                  Expanded(
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Image(
+                            image:
+                            AssetImage("assets/images/vert.jpg"),
+                            height: 50,
+                          ),
+                          Center(child: Text("Vert"))
+                        ]),
+                  ),
+                  Expanded(
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Image(
+                            image:
+                            AssetImage("assets/images/motif-a-fleurs.jpg"),
+                            height: 50,
+                          ),
+                          Center(child: Text("Motif à fleurs"))
                         ]),
                   )
                 ],
