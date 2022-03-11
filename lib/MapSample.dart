@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:brum_kart/Location/DirectionService.dart';
+import 'package:brum_kart/class/RaceServices.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,14 +11,29 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'main.dart';
 import 'route.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
+import 'package:flutter/services.dart' show rootBundle;
+
+class StateFulSimpleMap extends StatefulWidget{
+  @override
+  State createState() => SimpleMap();
+
+}
 
 
 class SimpleMap extends State<MyApp> {
+  String _mapStyle;
   GoogleMapController mapController;
-  Set<Marker> markers = Set();
+  List<Marker> markers = [];
   Marker currentMarker;
   bool cameraMove = false;
+  bool onRacing = false;
+  bool raceButton = true;
+  bool cancelButton = false;
+  // List<LatLng> waypointRace = [new LatLng(48.858724, 2.341296), new LatLng(48.857682, 2.345496), new LatLng(48.856939, 2.348214), new LatLng(48.856188, 2.348619), new LatLng(48.855929, 2.347429)];
+  List<LatLng> waypointRace = [new LatLng(48.858724, 2.341296), new LatLng(48.857682, 2.345496)];
+  RaceServices raceServices = new RaceServices();
 
   Map<PolylineId, Polyline> polylines = {};
 
@@ -28,14 +44,23 @@ class SimpleMap extends State<MyApp> {
 
   DirectionService directionService = DirectionService();
 
+  @override
+  void initState(){
+    super.initState();
+
+    rootBundle.loadString('assets/map_style.txt').then((string) {
+      _mapStyle = string;
+    });
+  }
 
   final LocationSettings locationSettings = LocationSettings(
     accuracy: LocationAccuracy.high,
     distanceFilter: 10,
   );
 
-  void _onMapCreated(GoogleMapController controller) {
+  void _onMapCreated(GoogleMapController controller) async{
     mapController = controller;
+    controller.setMapStyle(_mapStyle);
     final LocationSettings locationSettings = LocationSettings(
       accuracy: LocationAccuracy.high,
     );
@@ -43,7 +68,7 @@ class SimpleMap extends State<MyApp> {
 
 
     Geolocator.getPositionStream(
-        locationSettings: locationSettings).listen((Position position) {
+        locationSettings: locationSettings).listen((Position position) async {
           currentLocation = new LatLng(position.latitude, position.longitude);
 
           if(!cameraMove){
@@ -53,7 +78,36 @@ class SimpleMap extends State<MyApp> {
                 )
             );
           }
+
+          if(onRacing){
+            List<LatLng> waypointWithCurrentPos = List.from(waypointRace);
+            waypointWithCurrentPos.insert(0, currentLocation);
+            polylines =  await directionService.getPolyLineRoute(waypointWithCurrentPos);
+            if(raceServices.check(currentLocation)){
+              if(markers.isNotEmpty){
+                markers.removeAt(0);
+              }
+            }
+
+            if(raceServices.isWin()){
+              Fluttertoast.showToast(
+                  msg: "Victoire",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 8,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white,
+                  fontSize: 70.0
+              );
+              cancelButton = false;
+              raceButton = true;
+            }
+
+            setState(() {});
+          }
     });
+
+
   }
 
   // @override
@@ -114,8 +168,8 @@ class SimpleMap extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Maps Sample App'),
-          backgroundColor: Colors.green[700],
+          title: const Text("Brum'Kart"),
+          backgroundColor: Colors.red[700],
         ),
         body: Stack(
           children: [
@@ -135,7 +189,7 @@ class SimpleMap extends State<MyApp> {
               myLocationEnabled: true,
               myLocationButtonEnabled: false,
               onMapCreated: _onMapCreated,
-              markers: markers,
+              markers: markers.toSet(),
               initialCameraPosition: CameraPosition(
                 target: currentLocation,
                 zoom: 20.0,
@@ -143,21 +197,51 @@ class SimpleMap extends State<MyApp> {
             ),
             Align(
                 alignment: Alignment.bottomCenter,
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  child: FloatingActionButton.extended(
+                child: Visibility(
+                  visible: raceButton,
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: FloatingActionButton.extended(
 
-                    onPressed: () async {
-                      List<LatLng> latlng = [new LatLng(48.85749,2.351553), new LatLng(48.86233,2.334866)];
-                      markers = directionService.getMarkerList(latlng);
-                      polylines = await directionService.getPolyLineRoute(new LatLng(48.85749,2.351553), new LatLng(48.86233,2.334866));
-                      setState(() {});
-                    },
+                      onPressed: () async {
+                        waypointRace = [new LatLng(48.858724, 2.341296), new LatLng(48.857682, 2.345496)];
+                        markers = directionService.getMarkerList(waypointRace);
+                        polylines = await directionService.getPolyLineRoute(waypointRace);
+                        onRacing = true;
+                        raceServices.setWayPoint(waypointRace);
+                        raceButton = false;
+                        cancelButton = true;
+                        setState(() {});
+                      },
 
-                    label: const Text('Demarrer la course'),
-                    icon: Image.asset('assets/images/scooter.png',
-                        width: 90, height: 80),
-                    backgroundColor: Colors.red,
+                      label: const Text('Demarrer la course'),
+                      icon: Image.asset('assets/images/scooter.png',
+                          width: 90, height: 80),
+                      backgroundColor: Colors.red,
+                    ),
+                  ),
+                )
+            ),
+
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: Visibility(
+                  visible: cancelButton,
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: FloatingActionButton(
+                      child: cancelButtonImage(),
+                      onPressed: ()  {
+                        print("ok");
+                        waypointRace = [];
+                        markers = [];
+                        polylines = {};
+                        onRacing = false;
+                        raceButton = true;
+                        cancelButton = false;
+                        setState(() {});
+                      },
+                    ),
                   ),
                 )
             ),
@@ -202,11 +286,18 @@ class SimpleMap extends State<MyApp> {
     backgroundImage : AssetImage('assets/images/mario.png'),
   );
 
+  Widget cancelButtonImage() =>  CircleAvatar(
+    radius: 110,
+    backgroundColor: Colors.black,
+    backgroundImage : AssetImage('assets/images/cross.png'),
+  );
+
   targetImage() => CircleAvatar(
     radius: 110,
     backgroundImage: AssetImage('assets/images/target.png'),
     backgroundColor: Colors.white,
   );
+
 }
 
 

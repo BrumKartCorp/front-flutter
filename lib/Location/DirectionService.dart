@@ -15,25 +15,59 @@ class DirectionService{
     return values["routes"][0]["overview_polyline"]["points"];
   }
 
-  Set<Marker> getMarkerList(List<LatLng> latlngs){
-    Set<Marker> markers = Set();
+  List<Marker> getMarkerList(List<LatLng> latlngs){
+    List<Marker> markers = [];
+    int i = 0;
     latlngs.forEach((element) {
-      markers.add(Marker( //add start location marker
-        markerId: MarkerId(element.toString()),
-        position: element, //position of marker
-        icon: BitmapDescriptor.defaultMarker, //Icon for Marker
-      ));
+      Marker marker;
+
+      if (i == 0){
+        marker = Marker( //add start location marker
+          markerId: MarkerId(element.toString()),
+          position: element, //position of marker
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan), //Icon for Marker
+        );
+      }
+      else if (i == latlngs.length - 1){
+        marker = Marker( //add start location marker
+          markerId: MarkerId(element.toString()),
+          position: element, //position of marker
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen), //Icon for Marker
+        );
+      }
+      else {
+        marker = Marker( //add start location marker
+          markerId: MarkerId(element.toString()),
+          position: element, //position of marker
+          icon: BitmapDescriptor.defaultMarker //Icon for Marker
+        );
+      }
+      markers.add(marker);
+
+      i++;
     });
 
     return markers;
   }
 
-  Future<PolylineResult> getPolylineResult(LatLng start, LatLng end) async{
+  Future<PolylineResult> getPolylineResult(List<LatLng> waypoint) async{
+    print(waypoint.toString());
+
+    LatLng start = waypoint.first;
+    LatLng end = waypoint.last;
+
+    waypoint.removeAt(0);
+    waypoint.removeAt(waypoint.length - 1);
+
+    List<PolylineWayPoint> waypoints = [];
+    waypoint.forEach((element) {waypoints.add(new PolylineWayPoint(location: element.latitude.toString() + "," + element.longitude.toString()));});
+
     PolylinePoints polylinePoints = PolylinePoints();
     return polylinePoints.getRouteBetweenCoordinates(
       apiKey,
       PointLatLng(start.latitude, start.longitude),
       PointLatLng(end.latitude, end.longitude),
+      wayPoints: waypoints,
       travelMode: TravelMode.driving);
   }
 
@@ -66,8 +100,9 @@ class DirectionService{
     return polylines;
   }
 
-  Future<Map<PolylineId, Polyline>> getPolyLineRoute(LatLng start, LatLng end) async {
-      PolylineResult resultApi = await getPolylineResult(start, end);
+  Future<Map<PolylineId, Polyline>> getPolyLineRoute(List<LatLng> waypointRace) async {
+      List<LatLng> waypoint = List.from(waypointRace);
+      PolylineResult resultApi = await getPolylineResult(waypoint);
       List<LatLng> polylineCoordinates = getPolylineCoordinate(resultApi);
       return getPolyline(polylineCoordinates);
   }
