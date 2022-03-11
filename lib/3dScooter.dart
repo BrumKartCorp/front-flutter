@@ -192,3 +192,4 @@ class _ScooterView extends State<ScooterView> {
     );
   }
 }
+
