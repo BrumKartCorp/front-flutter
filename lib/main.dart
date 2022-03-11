@@ -16,13 +16,13 @@ import '3dScooter.dart';
 
 void main(){
   runApp(new MaterialApp(
-    home: new HelloWorld(),
+    home: new MyApp(),
   ));
 }
 
 class MyApp extends StatefulWidget {
   @override
-  _MyAppState createState() => new _MyAppState();
+  SimpleMap createState() => new SimpleMap();
 }
 
 class _MyAppState extends State<MyApp>  {

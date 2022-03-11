@@ -28,12 +28,14 @@ dependencies:
   flutter:
     sdk: flutter
   model_viewer: ^0.8.1
+
   arcore_flutter_plugin: ^0.0.11
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   splashscreen: ^1.3.5
+  fluttertoast: ^8.0.9
 
 
 
@@ -47,6 +49,14 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
+    - assets/images/
+    - assets/images/bleu.jpg
+    - assets/images/rouge.jpg
+    - assets/images/vert.jpg
+    - assets/images/motif-a-fleurs.jpg
+    - assets/images/mk8-background.jpg
+    - assets/models/scuuter.glb
+    - assets/map_style.txt
     - assets/images/logo_brumaire.png
     - assets/models/
   # The following line ensures that the Material Icons font is
