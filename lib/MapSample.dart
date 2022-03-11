@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:brum_kart/Location/DirectionService.dart';
 import 'package:brum_kart/class/RaceServices.dart';
@@ -11,6 +12,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'main.dart';
 import 'route.dart';
+import 'dart:ui' as ui;
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:flutter/services.dart' show rootBundle;
@@ -31,6 +33,7 @@ class SimpleMap extends State<MyApp> {
   bool onRacing = false;
   bool raceButton = true;
   bool cancelButton = false;
+  Marker myPosition;
   // List<LatLng> waypointRace = [new LatLng(48.858724, 2.341296), new LatLng(48.857682, 2.345496), new LatLng(48.856939, 2.348214), new LatLng(48.856188, 2.348619), new LatLng(48.855929, 2.347429)];
   List<LatLng> waypointRace = [new LatLng(48.858724, 2.341296), new LatLng(48.857682, 2.345496)];
   RaceServices raceServices = new RaceServices();
@@ -69,7 +72,26 @@ class SimpleMap extends State<MyApp> {
 
     Geolocator.getPositionStream(
         locationSettings: locationSettings).listen((Position position) async {
+          markers.remove(myPosition);
           currentLocation = new LatLng(position.latitude, position.longitude);
+
+          myPosition = Marker(
+
+            markerId: MarkerId("${currentLocation.latitude}"),
+            rotation: 30,
+            position: LatLng(
+
+                currentLocation.latitude, currentLocation.longitude),
+
+            icon: BitmapDescriptor.fromBytes(await getBytesFromAsset(
+
+                'assets/images/ScooterMarker.png', 250)),
+
+          );
+
+          markers.add(myPosition);
+          setState(() {
+          });
 
           if(!cameraMove){
             mapController.animateCamera(
@@ -90,15 +112,44 @@ class SimpleMap extends State<MyApp> {
             }
 
             if(raceServices.isWin()){
-              Fluttertoast.showToast(
-                  msg: "Victoire",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                  timeInSecForIosWeb: 8,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 70.0
-              );
+              // Fluttertoast.showToast(
+              //     msg: "Victoire",
+              //     toastLength: Toast.LENGTH_SHORT,
+              //     gravity: ToastGravity.CENTER,
+              //     timeInSecForIosWeb: 8,
+              //     backgroundColor: Colors.green,
+              //     textColor: Colors.white,
+              //     fontSize: 70.0
+              // );
+
+              showDialog(context: context, builder: (context) {
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  actions: <Widget>[
+                    Center(
+                      child: Container(
+                        child: Image.asset('assets/images/victory.png',
+                            width: 120, height: 150),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        "Victoire", style: TextStyle(fontSize: 50),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'OK'),
+                      child: const Text('Terminer'),
+                    ),
+                  ],
+                );
+              });
+              waypointRace = [];
+              markers = [];
+              polylines = {};
+              onRacing = false;
               cancelButton = false;
               raceButton = true;
             }
@@ -186,7 +237,7 @@ class SimpleMap extends State<MyApp> {
                 )),
               zoomControlsEnabled: false,
               polylines: Set<Polyline>.of(polylines.values),
-              myLocationEnabled: true,
+              myLocationEnabled: false,
               myLocationButtonEnabled: false,
               onMapCreated: _onMapCreated,
               markers: markers.toSet(),
@@ -232,7 +283,6 @@ class SimpleMap extends State<MyApp> {
                     child: FloatingActionButton(
                       child: cancelButtonImage(),
                       onPressed: ()  {
-                        print("ok");
                         waypointRace = [];
                         markers = [];
                         polylines = {};
@@ -297,6 +347,18 @@ class SimpleMap extends State<MyApp> {
     backgroundImage: AssetImage('assets/images/target.png'),
     backgroundColor: Colors.white,
   );
+
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+
+    ByteData data = await rootBundle.load(path);
+
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+
+    ui.FrameInfo fi = await codec.getNextFrame();
+
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
+
+  }
 
 }
 
