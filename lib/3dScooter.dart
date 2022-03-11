@@ -46,7 +46,7 @@ class _ScooterView extends State<ScooterView> {
                                 color: Colors.orange,
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(50)),
-                              color: Colors.amber
+                              color: Colors.black
                           ),
                           child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -56,7 +56,14 @@ class _ScooterView extends State<ScooterView> {
                                   AssetImage("assets/images/vert.jpg"),
                                   height: 50,
                                 ),
-                                Center(child: Text("Vert"))
+                                Center(
+                                    child: RichText(
+                                      text: TextSpan(
+                                        text: "Vert",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    )
+                                )
                               ]),
                         ),
                       ),
@@ -70,7 +77,7 @@ class _ScooterView extends State<ScooterView> {
                                 color: Colors.orange,
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(50)),
-                              color: Colors.amber
+                              color: Colors.black
                           ),
                           child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -80,7 +87,14 @@ class _ScooterView extends State<ScooterView> {
                                   AssetImage("assets/images/rouge.jpg"),
                                   height: 50,
                                 ),
-                                Center(child: Text("Rouge"))
+                                Center(
+                                    child: RichText(
+                                      text: TextSpan(
+                                        text: "Rouge",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    )
+                                )
                               ]),
                         ),
                       ),
@@ -94,7 +108,7 @@ class _ScooterView extends State<ScooterView> {
                                 color: Colors.orange,
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(50)),
-                             color: Colors.amber
+                             color: Colors.black
                           ),
                           child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -104,7 +118,14 @@ class _ScooterView extends State<ScooterView> {
                                     AssetImage("assets/images/motif-a-fleurs.jpg"),
                                     height: 50,
                                   ),
-                                  Center(child: Text("Fleurs"))
+                                  Center(
+                                      child: RichText(
+                                        text: TextSpan(
+                                          text: "Fleurs",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      )
+                                  )
                                 ]),
                           ),
                       ),
