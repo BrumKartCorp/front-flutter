@@ -27,6 +27,7 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   flutter:
     sdk: flutter
+  model_viewer: ^0.8.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -46,6 +47,12 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
+    - assets/images/bleu.jpg
+    - assets/images/rouge.jpg
+    - assets/images/vert.jpg
+    - assets/images/motif-a-fleurs.jpg
+    - assets/images/mk8-background.jpg
+    - assets/models/scuuter.glb
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
