@@ -201,3 +201,4 @@ class _ScooterView extends State<ScooterView> {
     backgroundColor: Colors.white,
   );
 }
+

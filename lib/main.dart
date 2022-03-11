@@ -1,6 +1,7 @@
 import 'package:brum_kart/controller/authentification.dart';
 import 'package:brum_kart/MapSample.dart';
 import 'package:brum_kart/route.dart';
+import 'package:brum_kart/helloworld.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -9,6 +10,9 @@ import 'controller/authentification.dart';
 import 'view/authentification_view.dart';
 
 
+
+
+import '3dScooter.dart';
 
 void main(){
   runApp(new MaterialApp(
