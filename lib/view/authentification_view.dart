@@ -123,6 +123,10 @@ class _AuthentificationView extends State<AuthentificationView> {
                         onPressed: () {
                           print(user.value);
                           getConnection(user.value.text, password.value.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => StateFulSimpleMap()),
+                          );
                         },
                         child: const Text('Connexion'),
                       )

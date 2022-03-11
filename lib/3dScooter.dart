@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:model_viewer/model_viewer.dart';
 
+import 'MapSample.dart';
+
 class ScooterView extends StatefulWidget {
   @override
   _ScooterView createState() => new _ScooterView();
@@ -27,6 +29,19 @@ class _ScooterView extends State<ScooterView> {
     );
 
     return Scaffold(
+      appBar: new AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            tooltip: 'Retour',
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) =>
+                      StateFulSimpleMap()
+              ));
+            },
+          ),
+          automaticallyImplyLeading: false
+      ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

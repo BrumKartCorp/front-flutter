@@ -18,7 +18,7 @@ void main(){
 
 class MyApp extends StatefulWidget {
   @override
-  SimpleMap createState() => new SimpleMap();
+  _MyAppState createState() => new _MyAppState();
 }
 
 class _MyAppState extends State<MyApp>  {

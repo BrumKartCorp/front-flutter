@@ -20,12 +20,12 @@ import 'package:flutter/services.dart' show rootBundle;
 
 class StateFulSimpleMap extends StatefulWidget{
   @override
-  State createState() => SimpleMap();
+  SimpleMap createState() => SimpleMap();
 
 }
 
 
-class SimpleMap extends State<MyApp> {
+class SimpleMap extends State<StateFulSimpleMap> {
   String _mapStyle;
   GoogleMapController mapController;
   List<Marker> markers = [];
