@@ -171,9 +171,33 @@ class _ScooterView extends State<ScooterView> {
                 ),
               ),
             ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                margin: const EdgeInsets.only(right: 8, bottom: 12),
+                child: FloatingActionButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ScooterView()),
+                    );
+                  },
+                  child : arImage(),
+
+                ),
+                height: 50,
+                width: 50,
+              ),
+            )
           ],
         ),
       ),
     );
   }
+
+  arImage() => CircleAvatar(
+    radius: 110,
+    backgroundImage: AssetImage('assets/images/ar.png'),
+    backgroundColor: Colors.white,
+  );
 }
