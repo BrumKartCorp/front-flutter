@@ -13,6 +13,7 @@ import 'main.dart';
 import 'route.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'package:flutter/services.dart' show rootBundle;
 
 class StateFulSimpleMap extends StatefulWidget{
   @override
@@ -22,6 +23,7 @@ class StateFulSimpleMap extends StatefulWidget{
 
 
 class SimpleMap extends State<MyApp> {
+  String _mapStyle;
   GoogleMapController mapController;
   List<Marker> markers = [];
   Marker currentMarker;
@@ -42,6 +44,14 @@ class SimpleMap extends State<MyApp> {
 
   DirectionService directionService = DirectionService();
 
+  @override
+  void initState(){
+    super.initState();
+
+    rootBundle.loadString('assets/map_style.txt').then((string) {
+      _mapStyle = string;
+    });
+  }
 
   final LocationSettings locationSettings = LocationSettings(
     accuracy: LocationAccuracy.high,
@@ -50,6 +60,7 @@ class SimpleMap extends State<MyApp> {
 
   void _onMapCreated(GoogleMapController controller) async{
     mapController = controller;
+    controller.setMapStyle(_mapStyle);
     final LocationSettings locationSettings = LocationSettings(
       accuracy: LocationAccuracy.high,
     );
