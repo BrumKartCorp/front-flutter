@@ -77,7 +77,7 @@ class _ScooterView extends State<ScooterView> {
                                   Center(
                                       child: RichText(
                                     text: TextSpan(
-                                      text: "Vert",
+                                      text: "Vert\n120 pièces",
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ))
@@ -117,7 +117,7 @@ class _ScooterView extends State<ScooterView> {
                                   Center(
                                       child: RichText(
                                     text: TextSpan(
-                                      text: "Rouge",
+                                      text: "Rouge\n130 pièces",
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ))
@@ -158,7 +158,7 @@ class _ScooterView extends State<ScooterView> {
                                   Center(
                                       child: RichText(
                                     text: TextSpan(
-                                      text: "fleurs",
+                                      text: "Fleur\n300 pièces",
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ))
