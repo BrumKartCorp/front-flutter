@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:brum_kart/Location/DirectionService.dart';
+import 'package:brum_kart/class/RaceServices.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +12,21 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'main.dart';
 import 'route.dart';
 
+class StateFulSimpleMap extends StatefulWidget{
+  @override
+  State createState() => SimpleMap();
+
+}
 
 
 class SimpleMap extends State<MyApp> {
   GoogleMapController mapController;
-  Set<Marker> markers = Set();
+  List<Marker> markers = [];
   Marker currentMarker;
   bool cameraMove = false;
+  bool onRacing = false;
+  List<LatLng> waypointRace = [new LatLng(48.85749,2.351553), new LatLng(48.86233,2.334866), new LatLng(48.86233,2.534866), new LatLng(48.86233,2.634866), new LatLng(48.86233,2.734866)];
+  RaceServices raceServices = new RaceServices();
 
   Map<PolylineId, Polyline> polylines = {};
 
@@ -52,6 +61,16 @@ class SimpleMap extends State<MyApp> {
                     CameraPosition(target: currentLocation, zoom: 20.0)
                 )
             );
+          }
+
+          if(onRacing){
+            if(raceServices.check(currentLocation)){
+              if(markers.isNotEmpty){
+                print("ok");
+                markers.removeAt(0);
+                setState(() {});
+              }
+            }
           }
     });
   }
@@ -135,7 +154,7 @@ class SimpleMap extends State<MyApp> {
               myLocationEnabled: true,
               myLocationButtonEnabled: false,
               onMapCreated: _onMapCreated,
-              markers: markers,
+              markers: markers.toSet(),
               initialCameraPosition: CameraPosition(
                 target: currentLocation,
                 zoom: 20.0,
@@ -148,9 +167,11 @@ class SimpleMap extends State<MyApp> {
                   child: FloatingActionButton.extended(
 
                     onPressed: () async {
-                      List<LatLng> latlng = [new LatLng(48.85749,2.351553), new LatLng(48.86233,2.334866)];
-                      markers = directionService.getMarkerList(latlng);
-                      polylines = await directionService.getPolyLineRoute(new LatLng(48.85749,2.351553), new LatLng(48.86233,2.334866));
+
+                      markers = directionService.getMarkerList(waypointRace);
+                      polylines = await directionService.getPolyLineRoute(waypointRace);
+                      onRacing = true;
+                      raceServices.setWayPoint(waypointRace);
                       setState(() {});
                     },
 
