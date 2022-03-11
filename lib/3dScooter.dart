@@ -1,3 +1,4 @@
+import 'package:brum_kart/helloworld.dart';
 import 'package:flutter/material.dart';
 import 'package:model_viewer/model_viewer.dart';
 
@@ -186,10 +187,34 @@ class _ScooterView extends State<ScooterView> {
                 ),
               ),
             ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                margin: const EdgeInsets.only(right: 8, bottom: 12),
+                child: FloatingActionButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HelloWorld()),
+                    );
+                  },
+                  child : arImage(),
+
+                ),
+                height: 50,
+                width: 50,
+              ),
+            )
           ],
         ),
       ),
     );
   }
+
+  arImage() => CircleAvatar(
+    radius: 110,
+    backgroundImage: AssetImage('assets/images/ar.png'),
+    backgroundColor: Colors.white,
+  );
 }
 
