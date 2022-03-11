@@ -1,3 +1,4 @@
+import 'package:brum_kart/helloworld.dart';
 import 'package:flutter/material.dart';
 import 'package:model_viewer/model_viewer.dart';
 
@@ -179,7 +180,7 @@ class _ScooterView extends State<ScooterView> {
                   onPressed: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ScooterView()),
+                      MaterialPageRoute(builder: (context) => HelloWorld()),
                     );
                   },
                   child : arImage(),
