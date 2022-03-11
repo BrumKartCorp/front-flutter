@@ -49,6 +49,7 @@ flutter:
     - assets/images/rouge.jpg
     - assets/images/vert.jpg
     - assets/images/motif-a-fleurs.jpg
+    - assets/images/mk8-background.jpg
     - assets/models/scuuter.glb
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

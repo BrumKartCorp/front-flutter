@@ -12,74 +12,109 @@ class _ScooterView extends State<ScooterView> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Container(
-            height: height * 0.70,
-            child: ModelViewer(
-              src: 'assets/models/scuuter.glb',
-              alt: "A 3D model of a scuuter",
-              autoRotate: true,
-              cameraControls: true,
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/mk8-background.jpg"),
+            fit: BoxFit.cover,
           ),
-          Container(
-            child: SingleChildScrollView(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage("assets/images/bleu.jpg"),
-                            height: 50,
-                          ),
-                          Center(child: Text("Bleu"))
-                        ]),
-                  ),
-                  Expanded(
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage("assets/images/rouge.jpg"),
-                            height: 50,
-                          ),
-                          Center(child: Text("Rouge"))
-                        ]),
-                  ),
-                  Expanded(
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Image(
-                            image:
-                            AssetImage("assets/images/vert.jpg"),
-                            height: 50,
-                          ),
-                          Center(child: Text("Vert"))
-                        ]),
-                  ),
-                  Expanded(
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Image(
-                            image:
-                            AssetImage("assets/images/motif-a-fleurs.jpg"),
-                            height: 50,
-                          ),
-                          Center(child: Text("Motif à fleurs"))
-                        ]),
-                  )
-                ],
+        ),
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: height * 0.70,
+              child: ModelViewer(
+                src: 'assets/models/scuuter.glb',
+                alt: "A 3D model of a scuuter",
+                autoRotate: true,
+                cameraControls: true,
+                backgroundColor: Colors.blueAccent,
               ),
             ),
-          ),
-        ],
+            Container(
+              child: SingleChildScrollView(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.orange,
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(50)),
+                              color: Colors.amber
+                          ),
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Image(
+                                  image:
+                                  AssetImage("assets/images/vert.jpg"),
+                                  height: 50,
+                                ),
+                                Center(child: Text("Vert"))
+                              ]),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.orange,
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(50)),
+                              color: Colors.amber
+                          ),
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Image(
+                                  image:
+                                  AssetImage("assets/images/rouge.jpg"),
+                                  height: 50,
+                                ),
+                                Center(child: Text("Rouge"))
+                              ]),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.orange,
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(50)),
+                             color: Colors.amber
+                          ),
+                          child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Image(
+                                    image:
+                                    AssetImage("assets/images/motif-a-fleurs.jpg"),
+                                    height: 50,
+                                  ),
+                                  Center(child: Text("Fleurs"))
+                                ]),
+                          ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
