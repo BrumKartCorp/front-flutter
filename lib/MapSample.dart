@@ -2,6 +2,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:brum_kart/3dScooter.dart';
 import 'package:brum_kart/Location/DirectionService.dart';
 import 'package:brum_kart/class/RaceServices.dart';
 import 'package:flutter/foundation.dart';
@@ -303,6 +304,12 @@ class SimpleMap extends State<MyApp> {
                 child: FloatingActionButton(
 
                   child: profileImage(),
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ScooterView()),
+                    );
+                  },
                 ),
                 height: 70,
                 width: 70,
